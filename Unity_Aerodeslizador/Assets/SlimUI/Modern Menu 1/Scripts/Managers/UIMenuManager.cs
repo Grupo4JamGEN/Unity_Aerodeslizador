@@ -19,7 +19,7 @@ namespace SlimUI.ModernMenu{
         [Tooltip("The Menu for when the EXIT button is clicked")]
         public GameObject exitMenu;
         [Tooltip("Optional 4th Menu")]
-        public GameObject extrasMenu;
+        public GameObject creditsMenu;
 
         public enum Theme {custom1, custom2, custom3};
         [Header("THEME SETTINGS")]
@@ -85,7 +85,7 @@ namespace SlimUI.ModernMenu{
 
 			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			firstMenu.SetActive(true);
 			mainMenu.SetActive(true);
 
@@ -119,27 +119,28 @@ namespace SlimUI.ModernMenu{
 
 		public void PlayCampaign(){
 			exitMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			playMenu.SetActive(true);
 		}
 		
 		public void PlayCampaignMobile(){
 			exitMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
 		}
 
 		public void ReturnMenu(){
 			playMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			mainMenu.SetActive(true);
 		}
 
 		public void LoadScene(string scene){
 			if(scene != ""){
-				StartCoroutine(LoadAsynchronously(scene));
+				//StartCoroutine(LoadAsynchronously(scene));
+				SceneManager.LoadScene(scene);
 			}
 		}
 
@@ -236,20 +237,20 @@ namespace SlimUI.ModernMenu{
 		// Are You Sure - Quit Panel Pop Up
 		public void AreYouSure(){
 			exitMenu.SetActive(true);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
 
 		public void AreYouSureMobile(){
 			exitMenu.SetActive(true);
-			if(extrasMenu) extrasMenu.SetActive(false);
+			if(creditsMenu) creditsMenu.SetActive(false);
 			mainMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
 
 		public void ExtrasMenu(){
 			playMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(true);
+			if(creditsMenu) creditsMenu.SetActive(true);
 			exitMenu.SetActive(false);
 		}
 
