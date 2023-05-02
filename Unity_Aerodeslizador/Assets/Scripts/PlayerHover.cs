@@ -12,12 +12,12 @@ public class PlayerHover : MonoBehaviour
 
     void Update()
     {
-        float Hor = Input.GetAxis("Vertical");
-        float Ver = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
 
         Vector3 newPos = transform.position;
-        newPos += transform.forward * Hor * maxSpeed * Time.deltaTime;
-        newPos += transform.right * Ver * maxSpeed * Time.deltaTime;
+        newPos += transform.forward * vertical * maxSpeed * Time.deltaTime;
+        newPos += transform.right * horizontal * maxSpeed * Time.deltaTime;
 
         RaycastHit hit;
         
