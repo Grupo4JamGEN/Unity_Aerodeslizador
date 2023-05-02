@@ -83,11 +83,16 @@ namespace SlimUI.ModernMenu{
 		void Start(){
 			CameraObject = transform.GetComponent<Animator>();
 
-			playMenu.SetActive(false);
-			exitMenu.SetActive(false);
-			if(creditsMenu) creditsMenu.SetActive(false);
-			firstMenu.SetActive(true);
-			mainMenu.SetActive(true);
+			
+			if(SceneManager.GetActiveScene().name== "StartScene(UI)")
+			{
+                playMenu.SetActive(false);
+                exitMenu.SetActive(false);
+                if (creditsMenu) creditsMenu.SetActive(false);
+                firstMenu.SetActive(true);
+                mainMenu.SetActive(true);
+            }
+			
 
 			SetThemeColors();
 		}
@@ -131,7 +136,7 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void ReturnMenu(){
-			playMenu.SetActive(false);
+            if (playMenu) playMenu.SetActive(false);
 			if(creditsMenu) creditsMenu.SetActive(false);
 			exitMenu.SetActive(false);
 			mainMenu.SetActive(true);
@@ -145,7 +150,11 @@ namespace SlimUI.ModernMenu{
 		}
 
 		public void  DisablePlayCampaign(){
-			playMenu.SetActive(false);
+			if (playMenu!=null)
+			{
+                playMenu.SetActive(false);
+            }
+			
 		}
 
 		public void Position2(){

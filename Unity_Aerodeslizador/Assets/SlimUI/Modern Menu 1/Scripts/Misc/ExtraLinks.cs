@@ -11,7 +11,7 @@ namespace SlimUI.ModernMenu{
         }
 
         public void JM(){
-            Application.OpenURL("http://u3d.as/1hTi");
+            Application.OpenURL("https://www.linkedin.com/in/jovanny-medina-castro-83a320234/");
         }
 
         public void YP(){
