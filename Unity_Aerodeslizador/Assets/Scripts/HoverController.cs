@@ -8,6 +8,7 @@ public class HoverController : MonoBehaviour
     public float hoverForce = 12.0f; // Fuerza de suspensión del aerodeslizador.
     public float hoverHeight = 3.5f; // Altura de suspensión del aerodeslizador.
     public float tiltAngle = 30.0f; // Ángulo de inclinación del aerodeslizador.
+    public float frictionForce = 5.0f; // Fuerza de fricción del aerodeslizador.
 
     private Rigidbody rb; // Componente Rigidbody del aerodeslizador.
     private AudioSource audioSource; // Componente AudioSource del aerodeslizador.
@@ -15,7 +16,7 @@ public class HoverController : MonoBehaviour
 
     private static HoverController instance; // Instancia Singleton de HoverController.
 
-    // Propiedad para acceder a la instancia Singleton de HoverController.
+   // Propiedad para acceder a la instancia Singleton de HoverController.
     public static HoverController Instance
     {
         get
@@ -33,10 +34,11 @@ public class HoverController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        rb.centerOfMass = Vector3.down; // Mover el centro de masa del aerodeslizador hacia abajo para mejorar la estabilidad.
     }
 
     // Método que se llama en cada frame.
-    private void Update()
+    private void FixedUpdate()
     {
         // Obtener los inputs de movimiento horizontal y vertical.
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -44,8 +46,12 @@ public class HoverController : MonoBehaviour
 
         // Aplicar una fuerza de suspensión hacia arriba para mantener el aerodeslizador a una altura constante.
         RaycastHit hit;
+        //Debug.DrawLine(transform.position, hit.point, Color.red);
+        //Debug.Log("Distancia del hit: " + hit.distance);
         if (Physics.Raycast(transform.position, -Vector3.up, out hit, hoverHeight))
         {
+            Debug.DrawLine(transform.position, hit.point, Color.blue);
+            Debug.Log("Distancia del hit: " + hit.distance);
             float proportionalHeight = (hoverHeight - hit.distance) / hoverHeight;
             Vector3 appliedHoverForce = Vector3.up * proportionalHeight * hoverForce;
             rb.AddForce(appliedHoverForce, ForceMode.Acceleration);
@@ -63,7 +69,7 @@ public class HoverController : MonoBehaviour
         }
 
         // Girar el aerodeslizador en función del input horizontal del usuario.
-        transform.Rotate(0, moveHorizontal * tiltAngle * Time.deltaTime, 0);
+        transform.Rotate(0, moveHorizontal * tiltAngle * Time.fixedDeltaTime, 0);
 
         // Actualizar el sonido del motor en función de la velocidad del aerodeslizador.
         audioSource.pitch = rb.velocity.magnitude / maxSpeed;
@@ -75,4 +81,5 @@ public class HoverController : MonoBehaviour
         }
     }
 }
+
 
