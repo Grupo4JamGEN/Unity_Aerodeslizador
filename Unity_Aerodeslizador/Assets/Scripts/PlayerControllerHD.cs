@@ -8,16 +8,16 @@ public class PlayerControllerHD : MonoBehaviour
     public float turnSpeed = 75.0f;
 
     public float distanceFromGround = 2f;           // Distancia desde el suelo para mantener al jugador
-    public float angleSpeed = 15f;                  // Velocidad de rotación en los ángulos de inclinación y rotación horizontal
-    public float maxTiltAngle = 45f;                // Ángulo máximo de inclinación de la nave
-    public float tiltSpeed = 15f;                   // Velocidad de inclinación de la nave
+    public float angleSpeed = 15f;                  // Velocidad de rotaciï¿½n en los ï¿½ngulos de inclinaciï¿½n y rotaciï¿½n horizontal
+    public float maxTiltAngle = 45f;                // ï¿½ngulo mï¿½ximo de inclinaciï¿½n de la nave
+    public float tiltSpeed = 15f;                   // Velocidad de inclinaciï¿½n de la nave
     public GameObject ship;
     public Rigidbody rb;
 
     private float horizontalInput;
     private float forwardInput;
 
-    private Vector3 deskUp = Vector3.zero;          // Vector que indica hacia arriba desde la superficie en la que está el jugador
+    private Vector3 deskUp = Vector3.zero;          // Vector que indica hacia arriba desde la superficie en la que estï¿½ el jugador
     private float tiltAngle = 0f;
 
     void Start()
@@ -38,26 +38,26 @@ public class PlayerControllerHD : MonoBehaviour
         transform.Rotate(Vector3.up, turnSpeed * horizontalInput * Time.deltaTime);
 
         Vector3 newPos = transform.position;
-        // Realizar un raycast hacia abajo desde la posición del jugador para determinar la altura y la normal de la superficie debajo de él
+        // Realizar un raycast hacia abajo desde la posiciï¿½n del jugador para determinar la altura y la normal de la superficie debajo de ï¿½l
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
-            // Establecer la posición del jugador en la superficie debajo de él, ajustando la altura según la distanciaFromGround
+            // Establecer la posiciï¿½n del jugador en la superficie debajo de ï¿½l, ajustando la altura segï¿½n la distanciaFromGround
             newPos.y = (hit.point + Vector3.up * distanceFromGround).y;
-            // Establecer el vector de dirección hacia arriba desde la superficie debajo del jugador
+            // Establecer el vector de direcciï¿½n hacia arriba desde la superficie debajo del jugador
             deskUp = hit.normal;
-            // Dibujar una línea desde la posición del jugador hasta la posición del impacto del raycast
-            // Debug.DrawLine(transform.position, hit.point, Color.green);
+            // Dibujar una lï¿½nea desde la posiciï¿½n del jugador hasta la posiciï¿½n del impacto del raycast
+            Debug.DrawLine(transform.position, hit.point, Color.green);
         }
         else
         {
-            // Si el raycast no impacta con ninguna superficie, dibujar una línea hacia abajo desde la posición del jugador
-            // Debug.DrawLine(transform.position, transform.position + Vector3.down * 100f, Color.red);
+            // Si el raycast no impacta con ninguna superficie, dibujar una lï¿½nea hacia abajo desde la posiciï¿½n del jugador
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * 100f, Color.red);
             rb.useGravity = true;
         }
     
 
-        // Establecer la nueva posición del jugador
+        // Establecer la nueva posiciï¿½n del jugador
         transform.position = newPos;
 
         float yAngle = transform.eulerAngles.y;
@@ -65,7 +65,7 @@ public class PlayerControllerHD : MonoBehaviour
 
         float targetTiltAngle = -horizontalInput * maxTiltAngle;
 
-        // Calcular el ángulo actual de inclinación
+        // Calcular el ï¿½ngulo actual de inclinaciï¿½n
         tiltAngle = Mathf.Lerp(tiltAngle, targetTiltAngle, tiltSpeed * Time.deltaTime);
 
         // Rotar la nave en el eje Y y Z
