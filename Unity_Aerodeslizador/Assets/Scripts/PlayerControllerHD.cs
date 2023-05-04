@@ -12,12 +12,19 @@ public class PlayerControllerHD : MonoBehaviour
     public float maxTiltAngle = 45f;                // Ángulo máximo de inclinación de la nave
     public float tiltSpeed = 15f;                   // Velocidad de inclinación de la nave
     public GameObject ship;
+    public Rigidbody rb;
 
     private float horizontalInput;
     private float forwardInput;
 
     private Vector3 deskUp = Vector3.zero;          // Vector que indica hacia arriba desde la superficie en la que está el jugador
     private float tiltAngle = 0f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,7 +46,19 @@ public class PlayerControllerHD : MonoBehaviour
             newPos.y = (hit.point + Vector3.up * distanceFromGround).y;
             // Establecer el vector de dirección hacia arriba desde la superficie debajo del jugador
             deskUp = hit.normal;
+            // Dibujar una línea desde la posición del jugador hasta la posición del impacto del raycast
+            // Debug.DrawLine(transform.position, hit.point, Color.green);
         }
+        else
+        {
+            // Si el raycast no impacta con ninguna superficie, dibujar una línea hacia abajo desde la posición del jugador
+            // Debug.DrawLine(transform.position, transform.position + Vector3.down * 100f, Color.red);
+            rb.useGravity = true;
+        }
+    
+
+        // Establecer la nueva posición del jugador
+        transform.position = newPos;
 
         float yAngle = transform.eulerAngles.y;
         float zAngle = transform.eulerAngles.z;
