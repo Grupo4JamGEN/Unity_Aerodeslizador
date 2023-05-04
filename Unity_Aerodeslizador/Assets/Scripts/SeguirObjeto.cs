@@ -21,6 +21,5 @@ public class SeguirObjeto : MonoBehaviour
 
         // Hacer que la cámara mire al objeto a seguir
         transform.LookAt(objetoASeguir);
-        //hahshahsha
     }
 }
