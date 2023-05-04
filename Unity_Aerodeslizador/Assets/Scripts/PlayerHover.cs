@@ -26,7 +26,7 @@ public class PlayerHover : MonoBehaviour
         // Calcular la nueva posición del jugador
         Vector3 newPos = transform.position;
         newPos += transform.forward * vertical * maxSpeed * Time.deltaTime;
-        newPos += transform.right * horizontal * maxSpeed * Time.deltaTime;
+        // newPos += transform.right * horizontal * maxSpeed * Time.deltaTime;
 
         // Realizar un raycast hacia abajo desde la posición del jugador para determinar la altura y la normal de la superficie debajo de él
         RaycastHit hit;
@@ -51,14 +51,20 @@ public class PlayerHover : MonoBehaviour
         // Interpolar suavemente el ángulo de inclinación actual hacia el ángulo de inclinación deseado
         tiltAngle = Mathf.Lerp(tiltAngle, targetTiltAngle, tiltSpeed * Time.deltaTime);
 
-        // Rotar la nave en el eje Y y Z, utilizando la normal de la superficie donde se encuentra
-        transform.rotation = Quaternion.Euler(deskUp) * Quaternion.Euler(0f, 0f, tiltAngle);
-
-        // Calcular la cantidad de rotación a aplicar en el eje horizontal
+        if( tiltAngle >= maxTiltAngle) {
+            tiltAngle = maxTiltAngle;
+        }
+        
+        // Rotar la nave en el eje Y, utilizando la normal de la superficie donde se encuentra
+        // Quaternion yNewRotation = Quaternion.Euler(deskUp) * Quaternion.Euler(0f, tiltAngle, 0f);
+        // Quaternion yNewRotation = Quaternion.Euler(0f, tiltAngle, 0f);
+        // Debug.Log(yNewRotation.eulerAngles);
+        // Calcular la cantidad de rotación a aplicar en el eje z
+        
         float rotationAmount = -horizontal * maxHorizontalRotation;
 
         // Calcular la rotación objetivo
-        Quaternion targetRotation = Quaternion.Euler(0f, yAngle + rotationAmount, zAngle);
+        Quaternion targetRotation = Quaternion.Euler(0f, yAngle + rotationAmount, zAngle + rotationAmount);
 
         // Interpolar suavemente la rotación actual hacia la rotación objetivo, a una velocidad determinada por angleSpeed
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, angleSpeed * Time.deltaTime);
