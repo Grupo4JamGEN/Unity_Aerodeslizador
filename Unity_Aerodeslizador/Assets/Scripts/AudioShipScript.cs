@@ -6,7 +6,7 @@ public class AudioShipScript : MonoBehaviour
 {
     PlayerControllerHD playerScript;
     AudioSource audioSource;
-    private float minPitch = 0.2f;
+    private float minPitch = 0.1f;
 
     public Rigidbody shipRB;
     private float pitchFromCar;
