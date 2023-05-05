@@ -6,8 +6,8 @@ public class SideSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject obstaclePrefab;
     [SerializeField] private int poolSize = 20;
-    //[SerializeField] private float spawnTime = 1.0f;
-    //private float timeElapsed;
+    [SerializeField] private float spawnTime = 1.0f;
+    private float timeElapsed;
     [SerializeField] private float minXPosition =-7.0f;
     [SerializeField] private float maxXPosition =-2.0f;
     [SerializeField] private float minZPosition = 335f;
@@ -44,7 +44,7 @@ public class SideSpawn : MonoBehaviour
             obstacles[i].SetActive(false);
 
         }
-        //timeElapsed = 0f;
+        timeElapsed = 0f;
         float zSpawnPosition = Random.Range(minZPosition , maxZPosition);
         float xSpawnPosition = Random.Range(minXPosition , maxXPosition);
         Vector3 spawnPosition = new Vector3(xSpawnPosition,1.6f,zSpawnPosition);
