@@ -24,7 +24,7 @@ namespace SlimUI.ModernMenu{
         public enum Theme {custom1, custom2, custom3};
         [Header("THEME SETTINGS")]
         public Theme theme;
-        private int themeIndex=0;
+        //private int themeIndex=0;
         public ThemedUIData themeController;
 
         [Header("PANELS")]
@@ -54,7 +54,7 @@ namespace SlimUI.ModernMenu{
 
 		void Start(){
 			CameraObject = transform.GetComponent<Animator>();
-
+			Time.timeScale = 1f;
 			
 			if(SceneManager.GetActiveScene().name== "StartScene(UI)")
 			{
@@ -76,17 +76,18 @@ namespace SlimUI.ModernMenu{
 				case Theme.custom1:
 					themeController.currentColor = themeController.custom1.graphic1;
 					themeController.textColor = themeController.custom1.text1;
-					themeIndex = 0;
+					
+					//themeIndex = 0;
 					break;
 				case Theme.custom2:
 					themeController.currentColor = themeController.custom2.graphic2;
 					themeController.textColor = themeController.custom2.text2;
-					themeIndex = 1;
+					//themeIndex = 1;
 					break;
 				case Theme.custom3:
 					themeController.currentColor = themeController.custom3.graphic3;
 					themeController.textColor = themeController.custom3.text3;
-					themeIndex = 2;
+					//themeIndex = 2;
 					break;
 				default:
 					Debug.Log("Invalid theme selected.");

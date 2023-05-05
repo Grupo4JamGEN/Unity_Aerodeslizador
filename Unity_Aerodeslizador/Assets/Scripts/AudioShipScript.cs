@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AudioShipScript : MonoBehaviour
 {
+    public GameManagerUI gameManagerScript;
     PlayerControllerHD playerScript;
     AudioSource audioSource;
     private float minPitch = 0.1f;
 
-    public Rigidbody shipRB;
     private float pitchFromCar;
 
 
-    private float carCurrentSpeed=0;
+    
      
     // Start is called before the first frame update
     void Start()
@@ -29,10 +29,23 @@ public class AudioShipScript : MonoBehaviour
         
 
         pitchFromCar = playerScript.currentSpeed/playerScript.speed; 
-        
-        if(pitchFromCar < minPitch)
+        if(gameManagerScript.gamePaused){
+
+            
+            audioSource.Pause();
+            
+        }else{
+            if(!audioSource.isPlaying){audioSource.Play();}
+            
+        }
+        if(pitchFromCar < minPitch){
             audioSource.pitch = Mathf.Lerp(audioSource.pitch,minPitch,Time.deltaTime);
-        else 
+        }
+            
+        else {
             audioSource.pitch = Mathf.Lerp(audioSource.pitch,1,Time.deltaTime);
+        }
+            
+            
     }
 }
