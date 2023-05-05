@@ -15,7 +15,7 @@ public class PlayerControllerHD : MonoBehaviour
     public float maxTiltAngle = 45f;                // �ngulo m�ximo de inclinaci�n de la nave
     public float tiltSpeed = 15f;                   // Velocidad de inclinaci�n de la nave
     public GameObject ship;
-    public Rigidbody rb;
+    private Rigidbody rb;
 
     private float horizontalInput;
     private float forwardInput;
@@ -85,6 +85,5 @@ public class PlayerControllerHD : MonoBehaviour
 
     void FixedUpdate() {
         lastPosition=transform.position;
-
     }
 }
