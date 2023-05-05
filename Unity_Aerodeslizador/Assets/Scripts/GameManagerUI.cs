@@ -18,6 +18,7 @@ public class GameManagerUI : MonoBehaviour
 
     private GameObject pauseButton;
     private GameObject pauseMenu;
+    private GameObject resumeButton;
 
     //Chronometer data
     private float startTime=60f;
@@ -47,6 +48,7 @@ public class GameManagerUI : MonoBehaviour
         Time.timeScale = 1f;
         pauseButton = GameObject.Find("Btn_Pause");
         pauseMenu = GameObject.Find("Menu_Pause");
+        resumeButton=GameObject.Find("Btn_ResumeGame");
         blackBackground = GameObject.Find("BlackBackground");
         pauseMenu.SetActive(false);
         blackBackground.SetActive(false);
@@ -60,33 +62,36 @@ public class GameManagerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!gamePaused)
+        if(!gameOver){
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PauseGame();
+                if (!gamePaused)
+                {
+                    PauseGame();
+                }
+                else { ResumeGame(); }
             }
-            else { ResumeGame(); }
-        }
 
-        //CHRONOMETER:
-         if (isChronometerRunning)
-        {
-            float elapsedTime = Time.time - startTime;
-            
-            float timeLeft=UpdateTimerText(elapsedTime);
-            //LOOSING BY TIME:
-            if(timeLeft<=0f){
+            //CHRONOMETER:
+            if (isChronometerRunning)
+            {
+                float elapsedTime = Time.time - startTime;
+                
+                float timeLeft=UpdateTimerText(elapsedTime);
+                //LOOSING BY TIME:
+                if(timeLeft<=0f){
+                    GameOver(false);
+
+                }
+                
+            }
+
+            //LOOSING BY FALL:
+            if(playerGameObject.transform.position.y<=-2.5){
                 GameOver(false);
-
             }
-            
         }
-
-        //LOOSING BY FALL:
-        if(playerGameObject.transform.position.y<=-2.5){
-            GameOver(false);
-        }
+        
 
 
         
@@ -139,7 +144,9 @@ public class GameManagerUI : MonoBehaviour
         }else{
             gameOverText.text="WE DIDN'T MAKE IT!";
         }
-        blackBackground.SetActive(true);
+
+        PauseGame();
+        resumeButton.SetActive(false);
         gameOverText.gameObject.SetActive(true);
     }
     
