@@ -15,7 +15,7 @@ public class ProcBasico : MonoBehaviour
             Instantiate(
             objetosPosibles[Random.Range(0, objetosPosibles.Length)],
             transform.position,
-            Quaternion.Euler(Vector3.up*(Random.Range(0, 4)*90)
+            Quaternion.Euler(Vector3.up*(Random.Range(0, 4)*180)
             ));
         }
         

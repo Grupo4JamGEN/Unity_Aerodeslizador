@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ObstaclesPool : MonoBehaviour
 {
-    [SerializeField] private GameObject obstaclePrefab;
+    [SerializeField] private GameObject[] obstaclePrefab;
     [SerializeField] private int poolSize = 20;
     [SerializeField] private float spawnTime = 1.0f;
     private float timeElapsed;
-    [SerializeField] private float minXPosition =-7.0f;
-    [SerializeField] private float maxXPosition =7.0f;
+    [SerializeField] private float minXPosition =3.68f;
+    [SerializeField] private float maxXPosition =-3.68f;
+    [SerializeField] private float minYPosition = 2f;
+    [SerializeField] private float maxYPosition = 4f;
     [SerializeField] private float minZPosition = -3000f;
     [SerializeField] private float maxZPosition = 50f;
      
@@ -21,7 +23,7 @@ public class ObstaclesPool : MonoBehaviour
         obstacles = new GameObject [poolSize];
         for(int i = 0 ; i< poolSize ; i++)
         {
-            obstacles[i] = Instantiate (obstaclePrefab);
+            obstacles[i] = Instantiate (obstaclePrefab[Random.Range(0, obstaclePrefab.Length)]);
             obstacles[i].SetActive(false);
 
         }
@@ -44,9 +46,11 @@ public class ObstaclesPool : MonoBehaviour
     void SpawnObstacle()
     {
         timeElapsed = 0f;
-        float zSpawnPosition = Random.Range(minZPosition , maxZPosition);
         float xSpawnPosition = Random.Range(minXPosition , maxXPosition);
-        Vector3 spawnPosition = new Vector3(xSpawnPosition,1.6f,zSpawnPosition);
+        float ySpawnPosition = Random.Range(minYPosition , maxYPosition);
+        float zSpawnPosition = Random.Range(minZPosition , maxZPosition);
+        
+        Vector3 spawnPosition = new Vector3(xSpawnPosition, ySpawnPosition ,zSpawnPosition);
         obstacles[obstacleCount].transform.position = spawnPosition;
 
         if(!obstacles[obstacleCount].activeSelf)
