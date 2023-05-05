@@ -9,9 +9,9 @@ public class SideSpawn : MonoBehaviour
     [SerializeField] private float spawnTime = 1.0f;
     private float timeElapsed;
     [SerializeField] private float minXPosition =-7.0f;
-    [SerializeField] private float maxXPosition =7.0f;
-    [SerializeField] private float minZPosition = -3000f;
-    [SerializeField] private float maxZPosition = 50f;
+    [SerializeField] private float maxXPosition =-2.0f;
+    [SerializeField] private float minZPosition = 335f;
+    [SerializeField] private float maxZPosition = 431f;
      
     private int obstacleCount;
     private GameObject[] obstacles;
