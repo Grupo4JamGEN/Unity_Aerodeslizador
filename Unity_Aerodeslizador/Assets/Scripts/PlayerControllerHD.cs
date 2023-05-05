@@ -7,6 +7,9 @@ public class PlayerControllerHD : MonoBehaviour
     public float speed = 20.0f;
     public float turnSpeed = 75.0f;
 
+
+    public float currentSpeed=0;
+
     public float distanceFromGround = 2f;           // Distancia desde el suelo para mantener al jugador
     public float angleSpeed = 15f;                  // Velocidad de rotaci�n en los �ngulos de inclinaci�n y rotaci�n horizontal
     public float maxTiltAngle = 45f;                // �ngulo m�ximo de inclinaci�n de la nave
@@ -20,10 +23,13 @@ public class PlayerControllerHD : MonoBehaviour
     private Vector3 deskUp = Vector3.zero;          // Vector que indica hacia arriba desde la superficie en la que est� el jugador
     private float tiltAngle = 0f;
 
+    private Vector3 lastPosition;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
+        lastPosition=transform.position;
     }
 
     // Update is called once per frame
@@ -56,7 +62,9 @@ public class PlayerControllerHD : MonoBehaviour
             rb.useGravity = true;
         }
     
+        currentSpeed=Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
 
+        
         // Establecer la nueva posici�n del jugador
         transform.position = newPos;
 
@@ -73,5 +81,10 @@ public class PlayerControllerHD : MonoBehaviour
 
         // Rotar la nave en el eje X, utilizando la normal de la superficie donde se encuentra
         //transform.up = Vector3.Slerp(transform.up, deskUp, angleSpeed * Time.deltaTime);
+    }
+
+    void FixedUpdate() {
+        lastPosition=transform.position;
+
     }
 }
