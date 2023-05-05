@@ -3,8 +3,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 5f;
-    public float leftBound = -8f;
-    public float rightBound = 8f;
+    public float leftBound = -1.89f;
+    public float rightBound = 2.6f;
     
     private bool rightMove = true;
     
