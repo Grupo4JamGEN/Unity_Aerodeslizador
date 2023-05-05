@@ -8,8 +8,8 @@ public class ShipController : MonoBehaviour
     public float rotationSpeed = 100.0f;
     public float tiltAngle = 10.0f;
     private float rotation = 0.0f;
-    private float lastPressTime = 0.0f;
-    private float doublePressDelay = 0.25f;
+    //private float lastPressTime = 0.0f;
+    //private float doublePressDelay = 0.25f;
 
     void Update()
     {
