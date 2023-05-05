@@ -136,7 +136,7 @@ public class GameManagerUI : MonoBehaviour
         isChronometerRunning = false;
     }
 
-    void GameOver(bool winCondition){
+    public void GameOver(bool winCondition){
         EndChronometer();
 
         if(winCondition){
@@ -162,24 +162,4 @@ public class GameManagerUI : MonoBehaviour
         return timeLeft;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-
-        EndChronometer();
-        
-        //Player ends the road
-        if (other.CompareTag("EndTrigger"))
-        {
-            
-            Debug.Log("Finished");
-            GameOver(true);           
-        }
-        //Player crashes
-        if (other.CompareTag("Obstacle"))
-        {
-            
-            Debug.Log("Crashed with Obstacle");
-            GameOver(false);
-        }
-    }
 }

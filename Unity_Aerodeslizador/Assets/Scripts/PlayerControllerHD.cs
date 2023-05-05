@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControllerHD : MonoBehaviour
 {
+    public GameManagerUI gameManager;
     public float speed = 20.0f;
     public float turnSpeed = 75.0f;
 
@@ -85,5 +86,21 @@ public class PlayerControllerHD : MonoBehaviour
 
     void FixedUpdate() {
         lastPosition=transform.position;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {        
+        //Player ends the road
+        if (other.CompareTag("EndTrigger"))
+        {
+            Debug.Log("Finished");
+            gameManager.GameOver(true);           
+        }
+        //Player crashes
+        if (other.CompareTag("Obstacles"))
+        {
+            Debug.Log("Crashed with Obstacle");
+            gameManager.GameOver(false); 
+        }
     }
 }
