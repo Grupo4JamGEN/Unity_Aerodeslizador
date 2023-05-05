@@ -9,6 +9,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Road
     second: {fileID: 2100000, guid: f75b5505be630454f98def3727f44c42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoadTransparente_
+    second: {fileID: 2100000, guid: a962cc99e8236534a8ac4967ffca32e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road_
+    second: {fileID: 2100000, guid: 1e894994eb62beb4cb3b08e2c1532e6e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
